@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>m3u8播放器</title>
+    <link href="http://cdn.bootcss.com/video.js/6.0.0-RC.5/alt/video-js-cdn.min.css" rel="stylesheet">
+</head>
+<body>
+<script type="text/javascript">
+ 
+</script>
+<div>
+  <input type="text" id="url" style="width: 80%;height: 30px" value="" />
+  <a href="javascript:play()">播放</a>
+</div>
+<video id="hls-video" width="1000" height="800" class="video-js vjs-default-skin"
+       playsinline webkit-playsinline
+       autoplay controls preload="auto"
+       x-webkit-airplay="true" x5-video-player-fullscreen="true" x5-video-player-typ="h5">
+
+    <!-- <source id="video-url" src="" type="application/x-mpegURL"> -->
+</video>
+
+<script src="http://cdn.bootcss.com/video.js/6.0.0-RC.5/video.js"></script>
+<script src="http://cdn.bootcss.com/videojs-contrib-hls/5.3.3/videojs-contrib-hls.js"></script>
+<script>
+  function play(){
+    if(typeof(window.player)=='undefined'){
+        var player = videojs('hls-video');
+       window.player = player;
+    }else{
+     window.player.pause();
+    }
+    var url = document.getElementById('url').value;
+
+    window.player.src({type:"application/x-mpegURL",src:url});
+    window.player.load();
+        window.player.ready(function() {
+          this.play();
+        });
+  }
+</script>
+</body>
+</html>
